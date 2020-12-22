@@ -136,6 +136,16 @@ arr_test_label = np.array(arr_test_label)
 # print("test label", len(arr_test_label))
 
 
+#plt.imshow(arr_test_img[10])#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test
+
+
+# plt.grid(False)
+# plt.imshow(arr_test_img[10], cmap=plt.cm.binary)
+# plt.xlabel(labels[arr_test_label[10]]) #value error: dictionary update sequence element #0 has length 1; 2 is required
+# print(labels[arr_test_label[10]])
+# plt.show()
+
+
 
 
 #создаем модель
@@ -174,7 +184,16 @@ def videoCap(model, cap):
             break
 
         #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        cv2.imshow('frame', frame)   #тут был gray,вместо frame
+        cv2.imshow('frame', frame)   #тут был gray, что означают аргументы?????//выдает ошибку imshow missing required agumenr 'mat'(pos 2)
+        print(frame.shape)#frame.shape=(480 640 3).
+
+        #ошибки WARNING:tensorflow:Model was constructed with shape (None, 128, 128) for input KerasTensor(type_spec=TensorSpec(shape=(None, 128, 128), ...
+        # .... , but it was called on an input with incompatible shape (32, 640, 3).
+
+        #  ValueError: Input 0 of layer dense is incompatible with the layer: expected axis -1 of input shape to
+        #  have value 16384 but received input with shape (32, 1920)  !!!(640*3 = 1920)!!!
+        #!!!!!!!!!!!изменить frame с помощью reshape, resize  !!!!!!!!!!
+        #result = model.predict(frame)
         if cv2.waitKey(25) & 0xFF == ord("q"):
             cap.release()
             cv2.destroyAllWindows()
@@ -184,8 +203,19 @@ videoCap(model, cap)
 #изображение работает,но модель еще не встроена,МОДЕЛЬ НЕ ПОНИМАЕТ КОГДА РУКИ НЕТ НА ЭКРАНЕ.У НЕЕ НЕТ ОТВЕТА "РУКИ НЕТ"
 #по крвйней мере мне так кажется.и надо будет модель учить заново?,ведь изображение с камеры и датасет отличаются.
 #
-"""""
 
+prediction = model.predict(arr_test_img)
+
+plt.grid(False)
+plt.imshow(arr_test_img[10], cmap=plt.cm.binary)
+plt.xlabel(labels[arr_test_label[10]])
+plt.show()
+print(labels[np.argmax(prediction[10])])
+
+
+
+
+"""""
 #тестируем
 test_loss, test_acc = model.evaluate(arr_test_img, arr_test_label)
 
@@ -193,9 +223,8 @@ print("Окончательная точность", test_acc)# 0.995
 
 #выводы 19.12.20
 #медленный,можно оптимизировать?
+
 """""
-
-
 
 
 
