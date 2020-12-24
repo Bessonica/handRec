@@ -45,18 +45,6 @@ for str_test in os.listdir(dir_test):
 
 
 
-#проверяем датасет
-#print(arr_test[0][0])
-#print(labels[arr_test[0][1]])
-#print(len(arr_train))#18000
-#print(arr_train[0][0].shape)#128,128
-#print(arr_train[0].shape)#'list' object has no attribute 'shape'
-#print(arr_train.shape) 18000, 2
-
-
-
-
-
 #отделяем фото от меток
 
 arr_train_img = []
@@ -70,23 +58,10 @@ for img_train, label_train in arr_train:
     arr_train_label.append(label_train)
 
 
-# #проверка
-# print("img : ", len(arr_train_img)) #18000
-# print("label : ", len(arr_train_label))  #18000
-# plt.imshow(arr_train_img[0], cmap = 'gray')
-# plt.show()
-# print(labels[arr_train_label[0]])
 
 for img_test, label_test in arr_test:
     arr_test_img.append(img_test)
     arr_test_label.append(label_test)
-
-# #проверка
-# print("img : ", len(arr_test_img)) #3600
-# print("label : ", len(arr_test_label))  #3600
-# plt.imshow(arr_test_img[0], cmap = 'gray')
-# plt.show()
-# print(labels[arr_test_label[0]])
 
 
 
@@ -116,10 +91,7 @@ arr_test_label = np.array(arr_test_label)
 #проверка
 #print("test image shape", arr_test_img.shape) #3600, 128, 128, 1
 #print("train image shape", arr_train_img.shape)#18000, 128, 128, 1
-# print("test img ", len(arr_test_img))
-# print("train img ", len(arr_train_img))
-# print("train label", len(arr_train_label))
-# print("test label", len(arr_test_label))
+
 
 
 #создаем модель
@@ -143,7 +115,7 @@ model.compile(optimizer="Adam", loss="sparse_categorical_crossentropy", metrics=
 #вспомни в чем разница между .fit и .evaluate
 model.fit(arr_train_img, arr_train_label,batch_size=32, epochs=5)
 
-#тистируем
+#тестируем
 test_loss, test_acc = model.evaluate(arr_test_img, arr_test_label)
 
 print("Окончательная точность", test_acc)# 0.995
