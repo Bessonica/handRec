@@ -48,18 +48,6 @@ for str_test in os.listdir(dir_test):
 
 #reshape и сделать черно белім изображение
 
-#проверяем датасет
-#print(arr_test[0][0])
-#print(labels[arr_test[0][1]])
-#print(len(arr_train))#18000
-#print(arr_train[0][0].shape)#128,128
-#print(arr_train[0].shape)#'list' object has no attribute 'shape'
-#print(arr_train.shape) 18000, 2
-
-
-
-
-
 #отделяем массивы фото от меток
 
 arr_train_img = []
@@ -72,38 +60,23 @@ for img_train, label_train in arr_train:
     arr_train_img.append(img_train)
     arr_train_label.append(label_train)
 
-
-# #проверка
-# print("img : ", len(arr_train_img)) #18000
-# print("label : ", len(arr_train_label))  #18000
-# plt.imshow(arr_train_img[0], cmap = 'gray')
-# plt.show()
-# print(labels[arr_train_label[0]])
+    
 
 for img_test, label_test in arr_test:
     arr_test_img.append(img_test)
     arr_test_label.append(label_test)
 
-# #проверка
-# print("img : ", len(arr_test_img)) #3600
-# print("label : ", len(arr_test_label))  #3600
-# plt.imshow(arr_test_img[0], cmap = 'gray')
-# plt.show()
-# print(labels[arr_test_label[0]])
 
 
 arr_train_img = np.array(arr_train_img).reshape(-1, 128, 128, 1)
 
 #arr_test_img это лист (list) из массивов,в каждом массиве 128 масивов с 128 элементов????
 
-#!!что если сделать цикл,где ті проходишь arr_test_img[i]( и делишь их на 255.0!!
-
-
 
 arr_test_img = np.array(arr_test_img).reshape(-1, 128, 128, 1)
 #print(arr_test_img[0].shape)#128,128 до ришейпа.   после (128, 128, 1)
 #осле ришейпа 1 изображение  это массив из масивов в которых числа(пиксели)в отдельных
-#массивах  [ [[15]...[15](128 элеиентов) ](строка 1) ... [[0]...(128 элеиентов)[0]](строка 128)  ]
+#массивах  [ [[15]...(128 элеиентов)[15] ](строка 1) ... [[0]...(128 элеиентов)[0]](строка 128)  ]
 
 arr_test_img = arr_test_img / 255.0
 arr_train_img = arr_train_img / 255.0
@@ -115,10 +88,7 @@ arr_test_label = np.array(arr_test_label)
 #проверка
 #print("test image shape", arr_test_img.shape) #3600, 128, 128, 1
 #print("train image shape", arr_train_img.shape)#18000, 128, 128, 1
-# print("test img ", len(arr_test_img))
-# print("train img ", len(arr_train_img))
-# print("train label", len(arr_train_label))
-# print("test label", len(arr_test_label))
+
 
 
 #создаем модель
