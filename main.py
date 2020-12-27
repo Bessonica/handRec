@@ -5,7 +5,9 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 import random
-#создаем свой датасет
+from tensorflow import keras
+
+
 
 #адрес фото
 dir_train = "D:/programming/deeplearning/dataset/hands/train"
@@ -94,26 +96,8 @@ arr_test_label = np.array(arr_test_label)
 
 
 
-#создаем модель
-
-#сколько нейронов выбрать?прочитал что оптимальный выбор числа нейронов между
-#инпутом(128*128 = 16 384) и аутпутом(12) многовато,нужно тестить
-#начну с 400+может быть сделать 2 внутренних слоя
-#точность 0.99 так что трех слоев достаточно.!!!не забудь протестировать на новой инфе(массив test и
-# еще есть папка fingers)
-
-
-model = tf.keras.Sequential([
-    tf.keras.layers.Flatten(input_shape=(128, 128)),
-    tf.keras.layers.Dense(400, activation="relu"),
-    tf.keras.layers.Dense(12, activation="softmax")
-])
-#разобраться в разнице между разными optimizer что делает RMSprop
-model.compile(optimizer="Adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
-#batc size по дефолту они и так 32,но у нас датасет и нужно обязательно указать.по крайней мере так прочитал
-#в документации
-#вспомни в чем разница между .fit и .evaluate
-model.fit(arr_train_img, arr_train_label,batch_size=32, epochs=5)
+#загружаем модель
+model = keras.models.load_model("saved_model")
 
 #тестируем
 test_loss, test_acc = model.evaluate(arr_test_img, arr_test_label)
@@ -123,9 +107,5 @@ print("Окончательная точность", test_acc)# 0.995
 #выводы 19.12.20
 #медленный,можно оптимизировать?
 #сделать CNN и добавить поддержку вебкамеры
-
-
-
-
 
 
