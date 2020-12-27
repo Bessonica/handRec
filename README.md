@@ -1,6 +1,7 @@
 # handRec
 hand recognition neural network created in python, tensorflow
 
+СОХРАНЕННУЮ МОДЕЛЬ СКИНУ ЗАВТРА В КАФЕ.ИНЕТ ГОВНО(МОБИЛЬНЫЙ)
 1. ~Создать прототип с tensorflow~
 2. ~Сделать CNN модель~
 3. Ввести поддержку веб камеры
