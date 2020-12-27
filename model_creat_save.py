@@ -1,8 +1,3 @@
-import numpy as np
-import tensorflow as tf
-from tensorflow import keras
-
-
 #import
 import os
 import cv2
@@ -10,6 +5,7 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 import random
+from tensorflow import keras
 #создаем свой датасет
 
 #адрес фото
